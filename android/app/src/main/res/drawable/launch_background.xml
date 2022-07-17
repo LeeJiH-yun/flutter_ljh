@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:background="#ffffff" />
+
+    <!-- You can insert your own image assets here -->
+    <!-- TODO: 스플래쉬 이미지 연결시킬 때 이 부분에 추가한다.-->
+     <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
+    </item>
+</layer-list>
