@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:write_jh/pages/home.dart';
+import 'package:write_jh/pages/calendar.dart';
+import 'package:write_jh/pages/myPage.dart';
 
 void main() { //플러터 앱 실행의 시작
   runApp(MyApp()); //MyApp은 클래스 이름으로 바꿔줄 수 있다.
@@ -36,15 +38,32 @@ class MainHome extends StatefulWidget {
 }
 
 class MainHomeState extends State<MainHome> {
-  final List<String> _textList = [ //구절
-    "'넌 사랑받기 충분한 사람이야'\n어느 날 말을 이을 수 없어 눈물만 흘리던 내게 지우가 그렇게 말했다.\n'앞으로는 내가 널 더 많이 사랑할게. 이제 사랑받는 기분이 뭔지도 느끼며 살아'\n아무 이유없이 나를 싫어하는 사람이 있듯이, 어떤 이유없이 나를 사랑해주는 사람도 있다는 것을 나는 지우를 보며 알았다.",
-    "그 길은 정말 이상한 곳이오.\n8월의 어느 날, 길을 따라가다가 고개를 들어보니 당신이 잔디밭을 지나 내 트럭으로 다가오고 있었소. 되돌아보면 피할 수 없는 일이었던 듯 싶소.\n달리는 될 수가 없었던 것 같소.",
-  ],
-  _textUserList = [ //작가랑 책명
-    "_최은영 소설 <밝은 밤>",
-    "_로버트 제임스 뮐러 소설 <매디슨 카운티의 다리>"
+  List<Map> mapArray = [
+    {"title": "'넌 사랑받기 충분한 사람이야'\n어느 날 말을 이을 수 없어 눈물만 흘리던 내게 지우가 그렇게 말했다.\n'앞으로는 내가 널 더 많이 사랑할게. 이제 사랑받는 기분이 뭔지도 느끼며 살아'\n아무 이유없이 나를 싫어하는 사람이 있듯이, 어떤 이유없이 나를 사랑해주는 사람도 있다는 것을 나는 지우를 보며 알았다",
+     "writeUser": "_최은영 소설 <밝은 밤>"},
+    {"title": "그 길은 정말 이상한 곳이오.\n8월의 어느 날, 길을 따라가다가 고개를 들어보니 당신이 잔디밭을 지나 내 트럭으로 다가오고 있었소. 되돌아보면 피할 수 없는 일이었던 듯 싶소.\n달리는 될 수가 없었던 것 같소.",
+      "writeUser": "_로버트 제임스 뮐러 소설 <매디슨 카운티의 다리>"},
+    {"title": "나는 이 이름을 오랫동안 낮은 목소리로 어둠 속에서 되풀이해 불러 본다. 그러자 내 마음속에서 무엇인가 의미를 알 수 없는 감정이 북받쳐 오르고, 나는 두 눈을 감은 채 조용히 그것을 맞이한다.\n슬픔이여 안녕!",
+      "writeUser": "_프랑수아즈 사강 소설 <슬픔이여 안녕>"},
+    {"title": "테스트 문구1",
+      "writeUser": "_테스트 소설 <테스트>"},
+    {"title": "테스트 문구2",
+      "writeUser": "_테스트2 소설 <테스트>"},
+    {"title": "테스트 문구3",
+      "writeUser": "_테스트3 소설 <테스트>"},
+    {"title": "테스트 문구4",
+      "writeUser": "_테스트4 소설 <테스트>"},
+    {"title": "테스트 문구5",
+      "writeUser": "_테스트5 소설 <테스트>"},
   ];
-  int idx = 0;
+  int //idx = 0,
+      _selectedIndex = 0;
+  static List<Widget> pages = [Home(),Calendar(),myPage()];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   //extends의 규칙: override를 반드시 해줘야한다.
   @override
@@ -56,64 +75,21 @@ class MainHomeState extends State<MainHome> {
         elevation: 0, //그림자 없애주기
       ), //플러터 내부 위젯
       // body: Container ( //Container는 div개념과 같다.
-      body: SingleChildScrollView( //overflow 오류가 나서 추가함
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: <Widget>[
-              InkWell(
-                onTap: () {
-                  setState(() { //setState() 함수 안에서의 호출은 State 에서 무언가 변경된 사항이 있음을 Flutter Framework 에 알려주는 역할이다.
-                    idx++;
-                  });
-                },
-                child: Column(
-                  children: <Widget> [
-                    Container(
-                      color: Colors.blue,
-                      padding: EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Icon(Icons.arrow_back_outlined, size: 50),
-                          Icon(Icons.arrow_forward_outlined, size: 50),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      padding: EdgeInsets.all(20),
-                      height: 400,
-                      child: Text(_textList[idx],
-                          style: TextStyle(fontSize: 20.0)),
-                    ),
-                    Container( //책 제목과 저자
-                      width: MediaQuery.of(context).size.width,
-                      height: 30,
-                      color: Colors.white,
-                      child: Text(_textUserList[idx],
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
-                          textAlign: TextAlign.right),
-                    ),
-                  ]
-                )
-              ),
-            ],
-          )
-      ),
+      body: pages[_selectedIndex], //화면 이동처리
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => {},
-        currentIndex: 0,
+        onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
         items: [
-          new BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon:  Icon(Icons.border_color_rounded),
             label: '홈',
           ),
-          new BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_rounded),
             label: '기록',
           ),
-          new BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: '마이페이지',
           ),
