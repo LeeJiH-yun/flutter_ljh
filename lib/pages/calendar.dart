@@ -1,15 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:write_jh/pages/textList.dart';
 
-class Calender extends StatefulWidget {
+class Calendar extends StatefulWidget {
+  const Calendar({Key? key}) : super(key: key);
+
   @override
-  _SecondState createState() => _SecondState();
+  _CalendarState createState() => _CalendarState();
 }
 
-class _SecondState extends State<SecondPage> {
+class _CalendarState extends State<Calendar> {
+  Map<DateTime, List<Event>> events = {
+    DateTime.utc(2022,7,13) : [ Event('title'), Event('title2')],
+    DateTime.utc(2022,7,14) : [ Event('title3')],
+  };
+  List<Event> _getEventsForDay(DateTime day) {
+    return events[day] ?? [];
+  }
+
+  DateTime selectedDay = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+  DateTime focusedDay = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Second'),
+    return Scaffold(
+      body: SingleChildScrollView( //overflow 오류가 나서 추가함
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            TableCalendar(
+              focusedDay: focusedDay, //달력에서 자동으로 보여줄 날
+              firstDay: DateTime.now().subtract(Duration(days: 365*10 + 2)),
+              lastDay: DateTime.now().add(Duration(days: 365*10 + 2)),
+              locale: 'ko-KR',
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+              ),
+              onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
+                //if () {
+                  //값이 있을 때만 이동시킨다.
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>textList()));
+                //}
+                // else {
+                //   setState(() {
+                //     //선택된 날짜의 상태를 갱신한다.
+                //     this.selectedDay = selectedDay;
+                //     this.focusedDay = focusedDay;
+                //   });
+                // }
+              },
+              selectedDayPredicate: (DateTime day) {
+                //selectedDay 와 동일한 날짜의 모양을 바꿔준다.
+                return isSameDay(selectedDay, day);
+              },
+              onPageChanged: (focusedDay) {
+                this.focusedDay = focusedDay;
+              },
+              calendarBuilders: CalendarBuilders(
+                //달력을 빌드한다.
+              ),
+              eventLoader: _getEventsForDay, //값이 있는 날짜 마커 디자인 변경해야함
+            ),
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: 70,
+              padding: EdgeInsets.all(10),
+              child: Text('6월 셋째 주 이행률\n 10%',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+            )
+          ],
+        )
+      )
     );
   }
+}
+
+class Event {
+  String test;
+
+  Event(this.test);
+  //저장된 구절이 있으면 표시를 해야하는데 이거 연동 어떻게 진행해야하나
 }

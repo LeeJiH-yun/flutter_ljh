@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
                   ],
                 )
             ),
-            Container(
+            Container( //책 내용
               color: Colors.white,
               width: MediaQuery.of(context).size.width,
               height: 400,

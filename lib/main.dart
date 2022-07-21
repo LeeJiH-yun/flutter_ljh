@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/home.dart';
 import 'package:write_jh/pages/calendar.dart';
 import 'package:write_jh/pages/myPage.dart';
 
 void main() { //플러터 앱 실행의 시작
+  initializeDateFormatting('ko-KR', null);
   runApp(MyApp()); //MyApp은 클래스 이름으로 바꿔줄 수 있다.
 }
 
@@ -39,7 +41,7 @@ class MainHome extends StatefulWidget {
 
 class MainHomeState extends State<MainHome> {
   int _selectedIndex = 0;
-  static List<Widget> pages = [Home(),Calendar(),myPage()];
+  static List<Widget> pages = [Home(),Calendar(),myPage()]; //탭 선택시 이동할 화면 class
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -54,6 +56,14 @@ class MainHomeState extends State<MainHome> {
         title: Text("그리다, 글"),
         centerTitle: true,
         elevation: 0, //그림자 없애주기
+        actions: <Widget>[ //앱바에서 아이콘을 왼쪽에 넣을 때는 actions위젯 오른쪽에 넣을 때는 leading사용
+          IconButton(
+            icon: Icon(Icons.save_alt_rounded),
+            onPressed: () {
+              print('menu button is clicked');
+            },
+          )
+        ]
       ), //플러터 내부 위젯
       // body: Container ( //Container는 div개념과 같다.
       body: pages[_selectedIndex], //화면 이동처리
