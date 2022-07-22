@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/textList.dart';
 
@@ -15,6 +16,8 @@ class _CalendarState extends State<Calendar> {
     DateTime.utc(2022,7,13) : [ Event('title'), Event('title2')],
     DateTime.utc(2022,7,14) : [ Event('title3')],
   };
+  List<String> dateArray = ['2022-07-13', '2022-07-14']; //값이 있을 때만 화면 이동 시키기 위해 테스트
+
   List<Event> _getEventsForDay(DateTime day) {
     return events[day] ?? [];
   }
@@ -43,17 +46,25 @@ class _CalendarState extends State<Calendar> {
                 titleCentered: true,
               ),
               onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-                //if () {
-                  //값이 있을 때만 이동시킨다.
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>textList()));
-                //}
-                // else {
-                //   setState(() {
-                //     //선택된 날짜의 상태를 갱신한다.
-                //     this.selectedDay = selectedDay;
-                //     this.focusedDay = focusedDay;
-                //   });
-                // }
+                //selectedDay는 [yyyy-MM-dd 00:00:00.000Z]로 값이 나와서 비교할 수가 없었다.
+                //그래서 날짜형식을 다음과 같이 지정했다.
+                final DateTime now = selectedDay; //선택한 날짜의 값을 변경시키기 위함이므로 selectedDay를 넣었따.
+                final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                final String formatted = formatter.format(now);
+
+                for (var i = 0; i < dateArray.length; i++) {
+                  if (dateArray[i] == formatted) {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>textList()));
+                  }
+                  else {
+                    setState(() {
+                        //선택된 날짜의 상태를 갱신한다.
+                        print(selectedDay);
+                        this.selectedDay = selectedDay;
+                        this.focusedDay = focusedDay;
+                      });
+                  }
+                }
               },
               selectedDayPredicate: (DateTime day) {
                 //selectedDay 와 동일한 날짜의 모양을 바꿔준다.

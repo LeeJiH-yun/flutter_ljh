@@ -5,7 +5,7 @@ import 'package:write_jh/pages/calendar.dart';
 import 'package:write_jh/pages/myPage.dart';
 
 void main() { //플러터 앱 실행의 시작
-  initializeDateFormatting('ko-KR', null);
+  initializeDateFormatting('ko-KR', null); //기본 언어 초기화
   runApp(MyApp()); //MyApp은 클래스 이름으로 바꿔줄 수 있다.
 }
 
@@ -42,6 +42,7 @@ class MainHome extends StatefulWidget {
 class MainHomeState extends State<MainHome> {
   int _selectedIndex = 0;
   static List<Widget> pages = [Home(),Calendar(),myPage()]; //탭 선택시 이동할 화면 class
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -85,7 +86,7 @@ class MainHomeState extends State<MainHome> {
             label: '마이페이지',
           ),
         ],
-      ),
+      )
     );
   }
 }
