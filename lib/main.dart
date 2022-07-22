@@ -53,23 +53,9 @@ class MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      appBar: AppBar (
-        title: Text("그리다, 글"),
-        centerTitle: true,
-        elevation: 0, //그림자 없애주기
-        actions: <Widget>[ //앱바에서 아이콘을 왼쪽에 넣을 때는 actions위젯 오른쪽에 넣을 때는 leading사용
-          IconButton(
-            icon: Icon(Icons.save_alt_rounded),
-            onPressed: () {
-              print('menu button is clicked');
-            },
-          )
-        ]
-      ), //플러터 내부 위젯
-      // body: Container ( //Container는 div개념과 같다.
       body: pages[_selectedIndex], //화면 이동처리
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        //type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
         items: [

@@ -8,8 +8,15 @@ class myPage extends StatefulWidget {
 class _myPageState extends State<myPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Third'),
+    return Scaffold(
+        appBar: AppBar (
+          title: Text("그리다, 글"),
+          centerTitle: true,
+          elevation: 0, //그림자 없애주기
+        ),
+        body: Container(
+          child: Text('Third')
+        )
     );
   }
 }

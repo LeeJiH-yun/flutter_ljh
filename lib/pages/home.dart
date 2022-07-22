@@ -29,6 +29,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar (
+          title: Text("그리다, 글"),
+          centerTitle: true,
+          elevation: 0, //그림자 없애주기
+          actions: <Widget>[ //앱바에서 아이콘을 왼쪽에 넣을 때는 actions위젯 오른쪽에 넣을 때는 leading사용
+            IconButton( //홈 화면에서만 저장 버튼을 보여준다.
+              icon: Icon(Icons.save_alt_rounded),
+              onPressed: () {
+                print('menu button is clicked');
+              },
+            )
+          ]
+      ),
       body: SingleChildScrollView( //overflow 오류가 나서 추가함
         scrollDirection: Axis.vertical,
         child: Column(

@@ -32,7 +32,12 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( //overflow 오류가 나서 추가함
+        appBar: AppBar (
+            title: Text("그리다, 글"),
+            centerTitle: true,
+            elevation: 0, //그림자 없애주기
+        ),
+        body: SingleChildScrollView( //overflow 오류가 나서 추가함
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
@@ -73,9 +78,6 @@ class _CalendarState extends State<Calendar> {
               onPageChanged: (focusedDay) {
                 this.focusedDay = focusedDay;
               },
-              calendarBuilders: CalendarBuilders(
-                //달력을 빌드한다.
-              ),
               eventLoader: _getEventsForDay, //값이 있는 날짜 마커 디자인 변경해야함
             ),
             Container(
@@ -83,7 +85,7 @@ class _CalendarState extends State<Calendar> {
               width: MediaQuery.of(context).size.width,
               height: 70,
               padding: EdgeInsets.all(10),
-              child: Text('6월 셋째 주 이행률\n 10%',
+              child: Text('7월 셋째 주 이행률\n 10%',
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
             )
           ],
