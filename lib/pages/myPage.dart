@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:write_jh/pages/loginPage.dart';
 
 class myPage extends StatefulWidget {
   @override
@@ -40,9 +41,16 @@ class _myPageState extends State<myPage> {
               //   child: Image.asset('asset/images/user.png', width: 100, height: 100, fit: BoxFit.fill),
               // ),
               SizedBox(height: 15.0),
-              Container(
-                width: 100,
-                child: Text("향고래", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),textAlign: TextAlign.center),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>loginPage()));
+                  });
+                },
+                child: Container(
+                  width: 100,
+                  child: Text("향고래", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),textAlign: TextAlign.center),
+                ),
               ),
               SizedBox(height: 35.0), //사이 공백
               Container(

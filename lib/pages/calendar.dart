@@ -33,9 +33,9 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar (
-            title: Text("그리다, 글"),
-            centerTitle: true,
-            elevation: 0, //그림자 없애주기
+          title: Text("그리다, 글"),
+          centerTitle: true,
+          elevation: 0, //그림자 없애주기
         ),
         body: SingleChildScrollView( //overflow 오류가 나서 추가함
         scrollDirection: Axis.vertical,
