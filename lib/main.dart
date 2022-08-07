@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/home.dart';
 import 'package:write_jh/pages/calendar.dart';
 import 'package:write_jh/pages/myPage.dart';
 
-void main() { //플러터 앱 실행의 시작
-  initializeDateFormatting('ko-KR', null); //기본 언어 초기화
+void main() async { //플러터 앱 실행의 시작
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  initializeDateFormatting('ko-KR', null);//기본 언어 초기화
   runApp(MyApp()); //MyApp은 클래스 이름으로 바꿔줄 수 있다.
 }
 

@@ -36,6 +36,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   table_calendar: ^3.0.6 # 사용할 라이브러리 추가를 하면 상단에 Pub get을 눌러서 설치해줘야한다..!
   intl: ^0.17.0
+  firebase_core: ^1.20.0 #가능한 최신버전 가져오도록 버전 삭제함 이러면 안되지만..
+  firebase_analytics:
+  firebase_database: ^9.1.0
+  firebase_messaging:
+  google_mobile_ads:
+  http:
+  sqflite:
+  path:
+  shared_preferences:
+  crypto:
 
 dev_dependencies:
   flutter_test:

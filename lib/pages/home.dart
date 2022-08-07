@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
             onPressed: () {
               print('menu button is clicked');
             },
-          )
+          ),
         ]
       ),
       body: SingleChildScrollView( //overflow 오류가 나서 추가함

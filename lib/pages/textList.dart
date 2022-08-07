@@ -25,20 +25,20 @@ class _textListState extends State<textList> {
         itemBuilder: (_, index) {
           final item = mapArray[index];
           return Card(
-              // this key is required to save and restore ExpansionTile expanded state
-              key: PageStorageKey(item['id']),
-              color: Colors.amber.shade200,
-              elevation: 4,
-              child: ExpansionTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                childrenPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                expandedCrossAxisAlignment: CrossAxisAlignment.end,
-                maintainState: true,
-                title: Text(item['writeUser']),
-                children: [
-                  Text(item['title']),
-                ]
-              )
+            // this key is required to save and restore ExpansionTile expanded state
+            key: PageStorageKey(item['id']),
+            color: Colors.amber.shade200,
+            elevation: 4,
+            child: ExpansionTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              childrenPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              expandedCrossAxisAlignment: CrossAxisAlignment.end,
+              maintainState: true,
+              title: Text(item['writeUser']),
+              children: [
+                Text(item['title']),
+              ]
+            )
           );
         },
       )
