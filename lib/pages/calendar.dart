@@ -3,6 +3,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/textList.dart';
+import 'package:write_jh/data/write.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -13,7 +14,10 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   Map<DateTime, List<Event>> events = {
-    DateTime.utc(2022,7,13) : [ Event('title'), Event('title2')],
+    DateTime.utc(2022,7,13) : [
+      Event('title'),
+      Event('title2')
+    ],
     DateTime.utc(2022,7,14) : [ Event('title3')],
   };
   List<String> dateArray = ['2022-07-13', '2022-07-14']; //값이 있을 때만 화면 이동 시키기 위해 테스트
