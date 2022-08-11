@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     super.initState();
 
     _database = FirebaseDatabase(databaseURL: _databaseURL);
-    reference = _database!.reference().child('saveWrite');
+    reference = _database!.reference().child('write');
   }
 
   void Message() {

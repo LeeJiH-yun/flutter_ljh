@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/textList.dart';
 import 'package:write_jh/data/write.dart';
@@ -13,6 +14,11 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  FirebaseDatabase? _database;
+  DatabaseReference? reference;
+  String _databaseURL = 'https://writejh-56604-default-rtdb.firebaseio.com/';
+  List<Write> writes = new List.empty(growable: true);
+
   Map<DateTime, List<Event>> events = {
     DateTime.utc(2022,7,13) : [
       Event('title'),
@@ -32,6 +38,17 @@ class _CalendarState extends State<Calendar> {
     DateTime.now().day,
   );
   DateTime focusedDay = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _database = FirebaseDatabase(databaseURL: _databaseURL);
+    reference = _database!.reference().child('write');
+
+    reference!.onChildAdded.listen((events) {
+      print("test?" + events.snapshot.value.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +101,23 @@ class _CalendarState extends State<Calendar> {
               },
               eventLoader: _getEventsForDay, //값이 있는 날짜 마커 디자인 변경해야함
             ),
-            Container(
-              color: Colors.white,
-              width: MediaQuery.of(context).size.width,
-              height: 70,
-              padding: EdgeInsets.all(10),
-              child: Text('7월 셋째 주 이행률\n 10%',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+            ListView.builder(
+              itemCount: writes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 20,
+                  child: Center(child: Text(writes[index].content)),
+                );
+              },
             )
+            // Container(
+            //   color: Colors.white,
+            //   width: MediaQuery.of(context).size.width,
+            //   height: 70,
+            //   padding: EdgeInsets.all(10),
+            //   child: Text('7월 셋째 주 이행률\n 10%',
+            //       style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+            // )
           ],
         )
       )

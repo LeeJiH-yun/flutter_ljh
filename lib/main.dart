@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:write_jh/pages/home.dart';
 import 'package:write_jh/pages/calendar.dart';
 import 'package:write_jh/pages/myPage.dart';
+import 'package:write_jh/pages/test.dart';
 
 void main() async { //플러터 앱 실행의 시작
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +45,7 @@ class MainHome extends StatefulWidget {
 
 class MainHomeState extends State<MainHome> {
   int _selectedIndex = 0;
-  static List<Widget> pages = [Home(),Calendar(),myPage()]; //탭 선택시 이동할 화면 class
+  static List<Widget> pages = [Home(),Test(),myPage()]; //탭 선택시 이동할 화면 class
 
   void _onItemTapped(int index) {
     setState(() {
